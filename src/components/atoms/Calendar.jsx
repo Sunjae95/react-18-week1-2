@@ -35,12 +35,14 @@ function Calendar({
   );
 }
 
-Calendar.defaultProps = { time: false, minDate: 1 };
+Calendar.defaultProps = {
+  time: false, minDate: 1, state: new Date(), onChange: () => {},
+};
 
 Calendar.propTypes = {
   time: PropTypes.bool,
-  state: PropTypes.instanceOf(Date).isRequired,
-  onChange: PropTypes.func.isRequired,
+  state: PropTypes.instanceOf(Date),
+  onChange: PropTypes.func,
   minDate: PropTypes.number,
 };
 
