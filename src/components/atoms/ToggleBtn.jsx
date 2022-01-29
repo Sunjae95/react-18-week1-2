@@ -48,12 +48,13 @@ const ToggleButton = styled.input`
 ToggleBtn.propTypes = {
   size: PropTypes.number,
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   isToggle: PropTypes.bool.isRequired,
 };
 
 ToggleBtn.defaultProps = {
   size: 1,
+  disabled: false,
 };
 
 export default ToggleBtn;
