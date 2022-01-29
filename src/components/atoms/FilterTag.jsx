@@ -1,4 +1,4 @@
-import { SettingFrameItem } from 'components/atoms';
+import { SettingFramItem } from 'components/atoms';
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -64,7 +64,7 @@ function FilterTag({ selectedTag, setSelectedTag }) {
 
   return (
     <Wrap>
-      <SettingFrameItem title="필터 태그">
+      <SettingFramItem title="필터 태그">
         <Content>
           <InputWrap>
             <input
@@ -99,7 +99,7 @@ function FilterTag({ selectedTag, setSelectedTag }) {
             ))}
           </SelectedTagList>
         </Content>
-      </SettingFrameItem>
+      </SettingFramItem>
     </Wrap>
   );
 }
