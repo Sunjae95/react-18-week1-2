@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { SettingFrameItem } from 'components/atoms';
+import { SettingFramItem } from 'components/atoms';
 import Calendar from 'components/atoms/Calendar';
 import RadioButton from 'components/atoms/RadioButton';
 import React from 'react';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 function Term({ name, select, setSelect }) {
   return (
-    <SettingFrameItem title={`상품 ${name} 기한`}>
+    <SettingFramItem title={`상품 ${name} 기한`}>
       <Content>
         <RadioButton
           name={name}
@@ -34,7 +34,7 @@ function Term({ name, select, setSelect }) {
           <Calendar time className="calendar" />
         </CalendarWrap>
       </Content>
-    </SettingFrameItem>
+    </SettingFramItem>
   );
 }
 
