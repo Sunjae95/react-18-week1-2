@@ -1,5 +1,4 @@
-import Input from 'components/atoms/Input';
-import SettingFramItem from 'components/atoms/SettingFrameItem';
+import { Input, SettingFramItem } from 'components/atoms';
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';

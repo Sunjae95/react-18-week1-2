@@ -1,6 +1,5 @@
-import SettingFramItem from 'components/atoms/SettingFrameItem';
+import { SettingFramItem, SelectCategories } from 'components/atoms';
 import React from 'react';
-import SelectCategories from 'components/atoms/SelectCategories';
 import PropTypes from 'prop-types';
 
 function Category({ handleBasicInfo, title }) {

@@ -1,5 +1,4 @@
-import ImageUpload from 'components/atoms/ImageUpload';
-import SettingFramItem from 'components/atoms/SettingFrameItem';
+import { ImageUpload, SettingFramItem } from 'components/atoms';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
