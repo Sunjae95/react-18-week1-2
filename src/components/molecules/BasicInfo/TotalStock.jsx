@@ -1,4 +1,4 @@
-import { SettingFramItem }from 'components/atoms';
+import { SettingFramItem } from 'components/atoms';
 import React, { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';

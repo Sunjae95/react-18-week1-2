@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { productOption } from 'utils/globalState';
+import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import isSavedState, { productOption, registerFormState } from 'utils/globalState';
 
 const OPT_SET_ADD_BTN = 'optSetAddBtn';
 const OPT_ADD_BTN = 'optAddBtn';
@@ -41,9 +42,7 @@ const newOptAddition = () => ({
 });
 
 const useProductState = () => {
-  const [optSets, setOptSets] = useState([]);
-  // 리코일 도입
-  // const [optSets, setOptSets] = useRecoilState(productOption);
+  const [optSets, setOptSets] = useRecoilState(productOption);
 
   const handleAdd = ({ name, id }) => {
     switch (name) {
@@ -54,10 +53,11 @@ const useProductState = () => {
       }
       case OPT_ADD_BTN: {
         const nextState = optSets.map((optSet) => {
+          const next = { ...optSet };
           if (optSet.id === id) {
-            optSet.options = [...optSet.options, newOption()];
+            next.options = [...optSet.options, newOption()];
           }
-          return optSet;
+          return next;
         });
 
         setOptSets(nextState);
@@ -65,14 +65,16 @@ const useProductState = () => {
       }
       case ADDITION_OPT_ADD_BTN: {
         const nextState = optSets.map((optSet) => {
-          optSet.options = optSet.options.map((option) => {
-            if (option.id === id) {
-              option.optAdditions = [...option.optAdditions, newOptAddition()];
+          const nextOS = { ...optSet };
+          nextOS.options = nextOS.options.map((option) => {
+            const nextOP = { ...option };
+            if (nextOP.id === id) {
+              nextOP.optAdditions = [...nextOP.optAdditions, newOptAddition()];
             }
-            return option;
+            return nextOP;
           });
 
-          return optSet;
+          return nextOS;
         });
 
         setOptSets(nextState);
@@ -92,10 +94,10 @@ const useProductState = () => {
       }
       case OPT_DEL_BTN: {
         const nextState = optSets.map((optSet) => {
-          const { options } = optSet;
-          optSet.options = options.filter((option) => option.id !== id);
+          const nextOS = { ...optSet };
+          nextOS.options = nextOS.options.filter((option) => option.id !== id);
 
-          return optSet;
+          return nextOS;
         });
 
         setOptSets(nextState);
@@ -103,19 +105,19 @@ const useProductState = () => {
       }
       case ADDITION_OPT_DEL_BTN: {
         const nextState = optSets.map((optSet) => {
-          const { options } = optSet;
-          optSet.options = options.map(
+          const nextOS = { ...optSet };
+          nextOS.options = nextOS.options.map(
             (option) => {
-              const { optAdditions } = option;
-              option.optAdditions = optAdditions.filter(
+              const nextOP = { ...option };
+              nextOP.optAdditions = nextOP.optAdditions.filter(
                 (optAddition) => optAddition.id !== id,
               );
 
-              return option;
+              return nextOP;
             },
           );
 
-          return optSet;
+          return nextOS;
         });
 
         setOptSets(nextState);
@@ -133,11 +135,12 @@ const useProductState = () => {
     switch (name) {
       case IMAGE: {
         const nextState = optSets.map((optSet) => {
-          if (optSet.id === id) {
-            optSet.image = value;
+          const nextOS = { ...optSets };
+          if (nextOS.id === id) {
+            nextOS.image = value;
           }
 
-          return optSet;
+          return nextOS;
         });
 
         setOptSets(nextState);
@@ -145,29 +148,30 @@ const useProductState = () => {
       }
       default: {
         const nextState = optSets.map((optSet) => {
-          const { options } = optSet;
-          optSet.options = options.map(
+          const nextOS = { ...optSet };
+          nextOS.options = nextOS.options.map(
             (option) => {
-              const { optAdditions } = option;
+              const nextOP = { ...option };
 
-              if (option.id === id) {
-                option[name] = value;
+              if (nextOP.id === id) {
+                nextOP[name] = value;
 
-                return option;
+                return nextOP;
               }
 
-              option.optAdditions = optAdditions.map((optAddition) => {
-                if (optAddition.id === id) {
-                  optAddition[name] = value;
+              nextOP.optAdditions = nextOP.optAdditions.map((optAddition) => {
+                const nextAOP = { ...optAddition };
+                if (nextAOP.id === id) {
+                  nextAOP[name] = value;
                 }
-                return optAddition;
+                return nextAOP;
               });
 
-              return option;
+              return nextOP;
             },
           );
 
-          return optSet;
+          return nextOS;
         });
 
         setOptSets(nextState);
