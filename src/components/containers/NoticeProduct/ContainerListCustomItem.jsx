@@ -46,11 +46,11 @@ function ContainerListCustomItem({
   // 하위 옵션 취함된 데이터를 위에서 합치기
   useEffect(() => {
     filteredProductList = productList.filter((item) => item.productKey === productKey);
-    filteredProductList[0].customList = customList;
+    filteredProductList[0].customList = { ...customList };
   }, [customList]);
 
   useEffect(() => {
-    saveData(`product-info-${productKey}`, filteredProductList);
+    console.log(filteredProductList);
   }, [isSaved]);
 
   return (

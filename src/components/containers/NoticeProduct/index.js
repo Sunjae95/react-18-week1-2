@@ -9,10 +9,6 @@ import styled from 'styled-components';
 import ContainerListCustomItem from './ContainerListCustomItem';
 import ContainerListItem from './ContainerListItem';
 
-function test(productList, customList) {
-  console.log(productList);
-}
-
 function NoticeProduct() {
   const [productList, setProductList] = useState([
     {
@@ -57,9 +53,6 @@ function NoticeProduct() {
   return (
     <SettingFrame title="상품 정보 고시" isBackground>
       <ContainerOuterBox>
-        <button type="button" onClick={() => test(productList)}>
-          button
-        </button>
         {productList.map((info, index) => (
           <ContainerInnerBox key={info.productKey}>
             <ContainerHeader>

@@ -29,7 +29,7 @@ function OtherOptions() {
     <SettingFrame title="상품 혜택 허용 설정">
       <SettingFramItem title="마일리지 적립">
         <ToggleBtn
-          checked={optionsStatus.thanksCard}
+          isToggle={optionsStatus.thanksCard}
           onChange={() => onCheckedChange()}
         />
       </SettingFramItem>

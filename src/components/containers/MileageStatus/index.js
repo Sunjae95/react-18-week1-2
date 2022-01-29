@@ -28,7 +28,7 @@ function MileageStatus() {
     <SettingFrame title="상품 혜택 허용 설정">
       <SettingFramItem title="마일리지 적립">
         <ToggleBtn
-          checked={mileageStatus.mileageStatus}
+          isToggle={mileageStatus.mileageStatus}
           onChange={() => onCheckedChange()}
         />
       </SettingFramItem>
