@@ -4,15 +4,27 @@ import Button from 'components/atoms/Button';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import isSavedState, { registerFormState } from 'utils/globalState';
 import NoticeInput from './NoticeInput';
 
 function ContainerListCustomItem({
   productKey, productList,
   setProductList,
 }) {
+  let filteredProductList;
+  const isSaved = useRecoilValue(isSavedState);
+  const [registerForm, setRegisterForm] = useRecoilState(registerFormState);
   const [customList, setCustomList] = useState([
     { productKey, customTitle: '', customDescription: '' },
   ]);
+
+  const saveData = (key, value) => {
+    setRegisterForm({
+      ...registerForm,
+      [key]: value,
+    });
+  };
 
   const handleInputChange = (event, index) => {
     const { name, value } = event.target;
@@ -33,10 +45,13 @@ function ContainerListCustomItem({
 
   // 하위 옵션 취함된 데이터를 위에서 합치기
   useEffect(() => {
-    const filteredProductList = productList.filter((item) => item.productKey === productKey);
+    filteredProductList = productList.filter((item) => item.productKey === productKey);
     filteredProductList[0].customList = customList;
-    console.log(filteredProductList);
   }, [customList]);
+
+  useEffect(() => {
+    saveData(`product-info-${productKey}`, filteredProductList);
+  }, [isSaved]);
 
   return (
     <>
