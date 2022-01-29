@@ -3,7 +3,9 @@ import { SettingFrame } from 'components/atoms';
 import Calendar from 'components/atoms/Calendar';
 import SettingFramItem from 'components/atoms/SettingFrameItem';
 import ToggleBtn from 'components/atoms/ToggleBtn';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import isSavedState, { registerFormState } from 'utils/globalState';
 
 function DeliveryOption() {
   const [deliveryStatus, setDeliveryStatus] = useState({
@@ -18,6 +20,20 @@ function DeliveryOption() {
     earlyDeliveryDate: new Date(),
     normalDeliveryDate: new Date(),
   });
+
+  const isSaved = useRecoilValue(isSavedState);
+  const [registerForm, setRegisterForm] = useRecoilState(registerFormState);
+
+  const saveData = (key, value) => {
+    setRegisterForm({
+      ...registerForm,
+      [key]: value,
+    });
+  };
+
+  useEffect(() => {
+    saveData('deliveryStatus', { deliveryStatus, orderTime });
+  }, [isSaved]);
 
   function onCustomCheckedChange() {
     setDeliveryStatus({
