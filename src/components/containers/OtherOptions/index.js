@@ -1,4 +1,4 @@
-import { SettingFrame, SettingFrameItem } from 'components/atoms';
+import { SettingFrame, SettingFramItem } from 'components/atoms';
 import ToggleBtn from 'components/atoms/ToggleBtn';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -27,12 +27,12 @@ function OtherOptions() {
 
   return (
     <SettingFrame title="상품 혜택 허용 설정">
-      <SettingFrameItem title="마일리지 적립">
+      <SettingFramItem title="마일리지 적립">
         <ToggleBtn
           checked={optionsStatus.thanksCard}
           onChange={() => onCheckedChange()}
         />
-      </SettingFrameItem>
+      </SettingFramItem>
     </SettingFrame>
   );
 }
